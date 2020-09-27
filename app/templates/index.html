@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3 class="text-right">You're logged in as <strong>{{ current_user.username }}</strong></h3>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<span class="bg-info">{{ message }}</span>
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% for event in events %}
+<div class="panel panel-primary">
+    <div class="panel-body">
+        <strong class="col-sm-2">Theme</strong>
+        <span class="col-sm-10">{{ event.theme }}</span>
+        <strong class="col-sm-2">Author</strong>
+        <span class="col-sm-10">{{ event.author.username }}</span>
+        <strong class="col-sm-2">Description</strong>
+        <span class="col-sm-10">{{ event.description }}</span>
+        <strong class="col-sm-2">Starts</strong>
+        <span class="col-sm-10">{{ event.start }}</span>
+        <strong class="col-sm-2">Ends</strong>
+        <span class="col-sm-10">{{ event.end }}</span>
+    </div>
+    <div class="panel-footer">
+        {% if current_user.username == event.author.username %}
+        <a href="/event/{{ event.id }}">edit</a> |
+        <a href="/delete/{{ event.id }}">delete</a>
+        {% endif %}
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

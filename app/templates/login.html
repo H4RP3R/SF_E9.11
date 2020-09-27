@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="col-sm">
+    <h1>Sign In</h1>
+    <p>or <a href="{{ url_for('register') }}">create account</a></p>
+</div>
+<form class='form-horizontal' action="" method="post" novalidate>
+    {{ form.csrf_token }}
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <span class="bg-info">{{ message }}</span>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <div class="form-group">
+        {{ form.username.label(class_='control-label col-sm-2') }}
+        <div class="col-sm-9">
+            {{ form.username(size=32, class_='form-control', placeholder='Enter username') }}
+        </div>
+        <div class="col-sm-offset-2 col-sm-9">
+            {% for error in form.username.errors %}
+            <span class="bg-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form.password.label(class_='control-label col-sm-2') }}
+        <div class="col-sm-9">
+            {{ form.password(size=32, class_='form-control', placeholder='Enter password') }}
+        </div>
+        <div class="col-sm-offset-2 col-sm-9">
+            {% for error in form.password.errors %}
+            <span class="bg-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-9">
+            <div class="checkbox">
+                <label>{{ form.remember_me() }} Remember me</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-9">
+            {{ form.submit(class_='btn btn-default') }}
+        </div>
+    </div>
+</form>
+{% endblock %}
