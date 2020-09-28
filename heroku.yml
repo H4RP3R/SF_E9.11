@@ -18,4 +18,3 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=uiGh2lah
       - POSTGRES_HOST=postgres
-    restart: always
