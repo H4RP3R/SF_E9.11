@@ -1,0 +1,21 @@
+version: '3.7'
+services:
+    flask:
+        build: .
+        ports:
+            - 5000:5000
+        depends_on:
+            - postgres
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=uiGh2lah
+            - POSTGRES_HOST=postgres
+        command: ["./wait-for-postgres.sh"]
+
+    postgres:
+        image: postgres
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=uiGh2lah
+            - POSTGRES_HOST=postgres
+        restart: always
