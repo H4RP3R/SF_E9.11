@@ -8,6 +8,9 @@
 {% endfor %}
 {% endif %}
 {% endwith %}
+{% if not events %}
+<p class="text-center">No events</p>
+{% endif %}
 {% for event in events %}
 <div class="panel panel-primary">
     <div class="panel-body">

@@ -51,7 +51,7 @@
             {{ form.description(class_='form-control', rows='6') }}
         </div>
         <div class="col-sm-offset-2 col-sm-9">
-            {% for error in form.theme.errors %}
+            {% for error in form.description.errors %}
             <span class="bg-danger">{{ error }}</span>
             {% endfor %}
         </div>

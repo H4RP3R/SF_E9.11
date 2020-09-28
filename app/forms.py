@@ -12,7 +12,7 @@ class LoginForm(FlaskForm):
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
 
-    def validate_username(set, username):
+    def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
         if not user:
             raise ValidationError('Unknown username.')
@@ -36,3 +36,7 @@ class EventForm(FlaskForm):
     theme = StringField('Theme', validators=[DataRequired()])
     description = TextAreaField('Description', validators=[DataRequired()])
     submit = SubmitField('Create')
+
+    def validate_start(self, start):
+        if self.end.data < start.data:
+            raise ValidationError('The event ends before the start')
